@@ -1,0 +1,20 @@
+.todo {
+  border: 2px solid black;
+  border-radius: 5px;
+  padding: 20px 20px;
+  width: 50%;
+}
+
+.todoButtons {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.text {
+  margin-left: 20px;
+}
+
+.user {
+}
