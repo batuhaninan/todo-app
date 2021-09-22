@@ -4,7 +4,7 @@ const User = db.user;
 const Op = db.Sequelize.Op;
 
 exports.create = (req, res) => {
-  if (!req.body.title) {
+  if (!req.body.text) {
       res.status(400).send({
           message: "Content can not be empty!"
       });
@@ -40,6 +40,26 @@ exports.findAll = (req, res) => {
 			message: err.message || "An error occurred while retrieving todos"
 	});
     });
+};
+
+exports.toggleFinished = (req, res) => {
+	const id = req.params.id;
+
+	const isFinished = req.body.isFinished;
+
+	Todo.update({isFinished: true}, {
+		where: {
+			id: id
+		}
+	})
+	  .then(data => {
+		res.send(data);
+	  })
+	  .catch(err => {
+		res.status(500).send({
+		  message: `Error retrieving todo with id=${id}`
+		});
+	  });
 };
 
 exports.findOne = (req, res) => {

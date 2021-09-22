@@ -4,7 +4,7 @@ module.exports = (app) => {
     var router = require("express").Router();
   
     router.route("/").get(Todo.findAll).post(Todo.create).delete(Todo.deleteAll)
-    router.route("/:id").get(Todo.findOne).delete(Todo.delete)
+    router.route("/:id").get(Todo.findOne).delete(Todo.delete).put(Todo.toggleFinished)
 
 
 
