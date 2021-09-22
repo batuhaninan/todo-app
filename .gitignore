@@ -136,3 +136,5 @@ thumb
 sketch
 
 *.vscode
+
+todo-backend/config/db.config.js
