@@ -1,0 +1,11 @@
+{
+  "name": "todo-app",
+  "version": "0.1.0",
+  "private": false,
+  "scripts": {
+    "server": "cd todo-backend && npm start",
+    "client": "cd todo-frontend && npm start",
+    "both": "concurrently \"npm run server\" \"npm run client\"",
+    "build": "npm install -g concurrently && npm run both"
+  }
+}
