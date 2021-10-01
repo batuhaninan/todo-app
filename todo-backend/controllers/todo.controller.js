@@ -3,6 +3,11 @@ const Todo = db.todo;
 const User = db.user;
 const Op = db.Sequelize.Op;
 
+const DatabaseUtils = require("../utils/database.util.js");
+const addUsernameToData = DatabaseUtils.addUsernameToData;
+const addUsernameToSingleData = DatabaseUtils.addUsernameToSingleData;
+
+
 exports.create = (req, res) => {
   if (!req.body.text) {
       res.status(400).send({
@@ -18,9 +23,15 @@ exports.create = (req, res) => {
   }
 
   Todo.create(todo)
-    .then((data) => {
+    .then(async (data) => {
         User.increment("todoCount", { by: 1, where: { id: todo.userId }});
-        res.send(data);
+		try {
+			const response = await addUsernameToSingleData(data)
+			await res.send(response)
+		} catch (error) {
+			console.log(error)
+		}
+		
     })
     .catch((err) => {
         res.status(500).send({
@@ -30,10 +41,12 @@ exports.create = (req, res) => {
 
 };
 
+
 exports.findAll = (req, res) => {
     Todo.findAll()
-	.then(data => {
-		res.send(data);
+	.then(async (data) => {
+		const response = await addUsernameToData(data)
+		await res.send(response)
 	})
 	.catch(err => {
 		res.status(500).send({
