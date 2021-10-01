@@ -1,6 +1,5 @@
 export function addTodo(todos, todo) {
-  todos.push(todo);
-  return todos
+  return [...todos, todo]
 }
   
 export function completeTodo(todos, todoId) {

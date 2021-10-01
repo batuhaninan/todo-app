@@ -8,26 +8,15 @@ import TodoContext from "./TodoContext";
 export const baseUrl = process.env.CLIENT_API_BASE_URL || "http://localhost:8080/api";
 
 const Index = () => {
-  const sampleTodo = useState([{
-    id: 1,
-    text: "",
-    isFinished: false,
-    user: "",
-    createdAt: "",
-    updatedAt: "",
-    userId: 1,
-}]) 
 
-  const todos = useTodos(useState([]))
+  const todoContext = useTodos(useState(useContext(TodoContext)))
 
   return (
-    <React.StrictMode>
       <BrowserRouter>
-        <TodoContext.Provider value={todos}>
+        <TodoContext.Provider value={todoContext}>
           <App />
         </TodoContext.Provider>
       </BrowserRouter>
-    </React.StrictMode>
   );
 }
 

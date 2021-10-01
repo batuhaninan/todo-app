@@ -3,21 +3,19 @@ import { baseUrl } from "../index";
 import axios from "axios";
 import { Button, TextField } from "@mui/material";
 import TodoContext from "../TodoContext";
-import styles from "./Todo.module.css";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
-import Typography from "@mui/material/Typography";
 
 const AddTodoForm = () => {
-  const todoContext = useContext(TodoContext);
+  const { addTodo } = useContext(TodoContext);
 
   const [postForm, setPostForm] = useState({
     text: "",
-    userId: "",
+    userId: "2",
     title: "add-todo",
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e) => {
     e.preventDefault();
     const value = e.target.value;
 
@@ -36,20 +34,21 @@ const AddTodoForm = () => {
       return;
     }
 
-    todoContext?.addTodo?.(res.data);
+    addTodo(res.data);
     setPostForm({
       text: "",
-      userId: "",
+      userId: "2",
       title: "add-todo",
     });
+    
   };
 
   return (
-    <Paper elevation={18} sx={{ width: "300px" }}>
+    <Paper elevation={18} sx={{ width: "30rem" }}>
       <Grid
         container
         spacing={2}
-        marginTop="100px"
+        marginTop="30px"
         paddingBottom="50px"
         marginLeft="20px"
         direction="column"
@@ -65,7 +64,7 @@ const AddTodoForm = () => {
           />
         </Grid>
 
-        <Grid item>
+        {/*<Grid item>
           <TextField
             id="filled-basic"
             label="User ID:"
@@ -74,7 +73,7 @@ const AddTodoForm = () => {
             onChange={handleChange}
             variant="filled"
           />
-        </Grid>
+        </Grid>*/}
         <Grid item>
           <Button variant="contained" color="success" onClick={submitForm}>
             Add TODO
